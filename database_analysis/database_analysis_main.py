@@ -47,7 +47,7 @@ def splitData(traningInfo):
     for type in image_types:
         trainingData[type] = random.sample(images_by_type[type], round(len(images_by_type[type]) * trainingElements))
         #taking the rest of elements
-        validationData[type] = np.setdiff1d(images_by_type[type], trainingData[type])
+        validationData[type] = np.setdiff1d(images_by_type[type], trainingData[type]).tolist()
 
     data = dict()
     data["trainingData"] = trainingData
