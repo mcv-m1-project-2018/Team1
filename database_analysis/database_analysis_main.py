@@ -11,6 +11,7 @@ import fnmatch
 import imageio
 import os
 import database_analysis.analysis_utils as imutil
+import random
 import sys
 import math
 
@@ -36,9 +37,22 @@ def splitData(traningInfo):
         images_by_type[type] = list_images.copy()
         list_images.clear()
 
+    #70% of the images are for training
+    trainingElements = 0.7
+
     trainingData = dict()
     validationData = dict()
 
+    #taking random training elements
+    for type in image_types:
+        trainingData[type] = random.sample(images_by_type[type], round(len(images_by_type[type]) * trainingElements))
+        #taking the rest of elements
+        validationData[type] = np.setdiff1d(images_by_type[type], trainingData[type])
+
+    data = dict()
+    data["trainingData"] = trainingData
+    data["validationData"] = validationData
+    return data
 
 def getTrainingInfo(evaluate_elements, dirname, file_names):
     database_info = dict()
