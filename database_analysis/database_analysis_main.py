@@ -138,33 +138,37 @@ def getThresholds(database_info):
     vectorE = []
     vectorF = []
 
-    for info in database_info:
-        if info[count]["type"] == 'A':
-            vectorA.append(info[count]["filling_ratio"])
-        elif info[count]["type"] == 'B':
-            vectorB.append(info[count]["filling_ratio"])
-        elif info[count]["type"] == 'C':
-            vectorC.append(info[count]["filling_ratio"])
-        elif info[count]["type"] == 'D':
-            vectorD.append(info[count]["filling_ratio"])
-        elif info[count]["type"] == 'E':
-            vectorE.append(info[count]["filling_ratio"])
-        elif info[count]["type"] == 'F':
-            vectorF.append(info[count]["filling_ratio"])
+    for type in database_info["type"]:
+        #Few samples has no mask
+        if database_info["filling_ratio"][count] != 0:
+            if type == 'A':
+                vectorA.append(database_info["filling_ratio"][count])
+            elif type == 'B':
+                vectorB.append(database_info["filling_ratio"][count])
+            elif type == 'C':
+                vectorC.append(database_info["filling_ratio"][count])
+            elif type == 'D':
+                vectorD.append(database_info["filling_ratio"][count])
+            elif type == 'E':
+                vectorE.append(database_info["filling_ratio"][count])
+            elif type == 'F':
+                vectorF.append(database_info["filling_ratio"][count])
+        count += 1
 
     thresholds = dict()
     thresholds["A"] = [min(vectorA), max(vectorA)]
-    thresholds["B"] = [min(vectorB), max(vectorA)]
-    thresholds["C"] = [min(vectorC), max(vectorA)]
-    thresholds["D"] = [min(vectorD), max(vectorA)]
-    thresholds["E"] = [min(vectorE), max(vectorA)]
-    thresholds["F"] = [min(vectorF), max(vectorA)]
+    thresholds["B"] = [min(vectorB), max(vectorB)]
+    thresholds["C"] = [min(vectorC), max(vectorC)]
+    thresholds["D"] = [min(vectorD), max(vectorD)]
+    thresholds["E"] = [min(vectorE), max(vectorE)]
+    thresholds["F"] = [min(vectorF), max(vectorF)]
+    return thresholds
 
 if __name__ == "__main__":
     # read arguments
-    args = docopt(__doc__)
+    #args = docopt(__doc__)
 
-    images_dir = args['<dirName>']  # Directory with input images and annotations
+    images_dir = '/train'  # Directory with input images and annotations
 
     main(images_dir)
 
