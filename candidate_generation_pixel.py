@@ -4,8 +4,8 @@ import numpy as np
 from skimage import color
 import matplotlib as plt
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import cv2
+#import matplotlib.image as mpimg
+#import cv2
 
 def candidate_generation_pixel_normrgb(im):
     # convert input image to the normRGB color space

@@ -124,7 +124,41 @@ def main(directory):
     database_info["frecuency_typeF"] = count_frecunacy_typeF / count_img
 
 
-    imutil.create_table(['image','Type','height_box', 'width_box','form_factor', 'filling_ratio','mask_area','background_area'], [database_info["image"] ,database_info["type"],database_info["height_box"], database_info["width_box"],database_info["form_factor"],database_info["filling_ratio"], database_info["mask_area"],database_info["background_area"]])
+    #imutil.create_table(['image','Type','height_box', 'width_box','form_factor', 'filling_ratio','mask_area','background_area'], [database_info["image"] ,database_info["type"],database_info["height_box"], database_info["width_box"],database_info["form_factor"],database_info["filling_ratio"], database_info["mask_area"],database_info["background_area"]])
+
+    typeThresholds = getThresholds(database_info)
+
+
+def getThresholds(database_info):
+    count = 0
+    vectorA = []
+    vectorB = []
+    vectorC = []
+    vectorD = []
+    vectorE = []
+    vectorF = []
+
+    for info in database_info:
+        if info[count]["type"] == 'A':
+            vectorA.append(info[count]["filling_ratio"])
+        elif info[count]["type"] == 'B':
+            vectorB.append(info[count]["filling_ratio"])
+        elif info[count]["type"] == 'C':
+            vectorC.append(info[count]["filling_ratio"])
+        elif info[count]["type"] == 'D':
+            vectorD.append(info[count]["filling_ratio"])
+        elif info[count]["type"] == 'E':
+            vectorE.append(info[count]["filling_ratio"])
+        elif info[count]["type"] == 'F':
+            vectorF.append(info[count]["filling_ratio"])
+
+    thresholds = dict()
+    thresholds["A"] = [min(vectorA), max(vectorA)]
+    thresholds["B"] = [min(vectorB), max(vectorA)]
+    thresholds["C"] = [min(vectorC), max(vectorA)]
+    thresholds["D"] = [min(vectorD), max(vectorA)]
+    thresholds["E"] = [min(vectorE), max(vectorA)]
+    thresholds["F"] = [min(vectorF), max(vectorA)]
 
 if __name__ == "__main__":
     # read arguments
