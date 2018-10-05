@@ -22,3 +22,13 @@ def create_table(headers, cells):
     data = [trace]
     py.plot(data, filename='basic_table')
 
+
+def divide_by_type(dic_images,type):
+    count = 0
+    listIndexs= []
+    for i in dic_images:
+        if(i==type):
+            listIndexs.append(count)
+        count = count + 1
+
+    return listIndexs
