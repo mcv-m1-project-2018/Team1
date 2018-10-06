@@ -6,11 +6,24 @@ import cv2
 def candidate_generation_window_example1(im, pixel_candidates):
     window_candidates = [[17.0, 12.0, 49.0, 44.0], [60.0,90.0,100.0,130.0]]
 
-    lineThickness = 20
-    #cv2.rectangle(pixel_candidates, (500,500),(1000,1000), (255, 255, 255), lineThickness)
+    x = 0
+    y = 0
+    initialPoint = ()
+    finalPoint = ()
+
+    for pixels in pixel_candidates:
+        for value in pixels:
+            if value == 1 and initialPoint == ():
+                initialPoint = (x, y)
+            x += 1
+        x = 0
+        y += 1
+
+    lineThickness = 2
+    cv2.rectangle(im, initialPoint, (10000, 1000), (255, 255, 255), lineThickness)
 
 
-    imutil.visualize_image(pixel_candidates)
+    imutil.visualize_image(im)
 
     return window_candidates
  

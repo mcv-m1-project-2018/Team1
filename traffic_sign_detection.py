@@ -64,30 +64,30 @@ def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
 
         # Accumulate pixel performance of the current image #################
         print('{}/{}.png'.format(fd,base))
-        pixel_annotation = imageio.imread('{}/mask.{}.png'.format(fd,base)) > 0
+        #pixel_annotation = imageio.imread('{}/mask.{}.png'.format(fd,base)) > 0
 
-        [localPixelTP, localPixelFP, localPixelFN, localPixelTN] = evalf.performance_accumulation_pixel(pixel_candidates, pixel_annotation)
-        pixelTP = pixelTP + localPixelTP
-        pixelFP = pixelFP + localPixelFP
-        pixelFN = pixelFN + localPixelFN
-        pixelTN = pixelTN + localPixelTN
+        #[localPixelTP, localPixelFP, localPixelFN, localPixelTN] = evalf.performance_accumulation_pixel(pixel_candidates, pixel_annotation)
+        #pixelTP = pixelTP + localPixelTP
+        #pixelFP = pixelFP + localPixelFP
+        #pixelFN = pixelFN + localPixelFN
+        #pixelTN = pixelTN + localPixelTN
 
-        [pixel_precision, pixel_accuracy, pixel_specificity, pixel_sensitivity] = evalf.performance_evaluation_pixel(pixelTP, pixelFP, pixelFN, pixelTN)
+        #[pixel_precision, pixel_accuracy, pixel_specificity, pixel_sensitivity] = evalf.performance_evaluation_pixel(pixelTP, pixelFP, pixelFN, pixelTN)
 
-        if window_method != 'None':
+        #if window_method != 'None':
             # Accumulate object performance of the current image ################
-            window_annotationss = load_annotations('{}/gt/gt.{}.txt'.format(directory, base))
-            [localWindowTP, localWindowFN, localWindowFP] = evalf.performance_accumulation_window(window_candidates, window_annotationss)
-            windowTP = windowTP + localWindowTP
-            windowFN = windowFN + localWindowFN
-            windowFP = windowFP + localWindowFP
+            #window_annotationss = load_annotations('{}/gt/gt.{}.txt'.format(directory, base))
+            #[localWindowTP, localWindowFN, localWindowFP] = evalf.performance_accumulation_window(window_candidates, window_annotationss)
+            #windowTP = windowTP + localWindowTP
+            #windowFN = windowFN + localWindowFN
+            #windowFP = windowFP + localWindowFP
 
 
             # Plot performance evaluation
-            [window_precision, window_sensitivity, window_accuracy] = evalf.performance_evaluation_window(windowTP, windowFN, windowFP)
+            #[window_precision, window_sensitivity, window_accuracy] = evalf.performance_evaluation_window(windowTP, windowFN, windowFP)
 
-    return [pixel_precision, pixel_accuracy, pixel_specificity, pixel_sensitivity, window_precision, window_accuracy]
-
+    #return [pixel_precision, pixel_accuracy, pixel_specificity, pixel_sensitivity, window_precision, window_accuracy]
+    return 0
 
 
 
