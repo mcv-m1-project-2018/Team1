@@ -11,7 +11,7 @@ def candidate_generation_window_example1(im, pixel_candidates):
     initialPoint = ()
     finalPoint = ()
 
-    for pixels in pixel_candidates:
+    for pixels in pixel_candidates: #It goes through the pixels to determine the starting point.
         for value in pixels:
             if value == 1:
                 if initialPoint == ():
