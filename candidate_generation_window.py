@@ -10,8 +10,6 @@ def candidate_generation_window_example1(im, pixel_candidates):
     y = 0
     initialPointX = -1
     initialPointY = -1
-    finalPointX = -1
-    finalPointY = -1
 
     for yAxis in pixel_candidates:  # It goes through the pixels to determine the starting point.
         for pixel in yAxis:
@@ -20,17 +18,11 @@ def candidate_generation_window_example1(im, pixel_candidates):
                 if initialPointX == -1:
                     initialPointX = x
                     initialPointY = y
-                    finalPointX = x
-                    finalPointY = y
-                if y > finalPointY:
-                    finalPointY = y
-                if x > finalPointX:
-                    finalPointX = x
             # second point (reverse axis for y)
             elif initialPointX != -1:
                 #prevent out of bounds
                 #finish of the shape
-                maxRange = 20
+                maxRange = 10
                 linesWithNoOnes = 0
                 for ySearch in range(0, maxRange):
                     if len(pixel_candidates) > y + ySearch:
@@ -46,11 +38,9 @@ def candidate_generation_window_example1(im, pixel_candidates):
 
                 #not found
                 if linesWithNoOnes/2 == maxRange:
-                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
+                    cv2.rectangle(im, (initialPointX, initialPointY), (x, y), (255, 255, 0), 2)
                     initialPointX = -1
                     initialPointY = -1
-                    finalPointX = -1
-                    finalPointY = -1
             x += 1
         #reset x every new line
         x = 0
