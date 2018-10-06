@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68e9db5b-f036-48cd-bd12-74969fb45361" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/database_analysis/database_analysis_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_analysis/database_analysis_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/candidate_generation_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/candidate_generation_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traffic_sign_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic_sign_detection.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,22 +21,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="9" />
+          <entry key="py" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="9" />
+          <entry key="Python" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2401" />
+          <entry key="py" value="2891" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2401" />
+          <entry key="Python" value="2891" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -43,40 +44,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/candidate_generation_window.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+              <folding>
+                <element signature="e#42#91#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/traffic_sign_detection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="103" column="59" selection-start-line="103" selection-start-column="59" selection-end-line="103" selection-end-column="59" />
+            <state relative-caret-position="151">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#260#285#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database_analysis/database_analysis_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="49" column="94" selection-start-line="49" selection-start-column="94" selection-end-line="49" selection-end-column="94" />
-              <folding>
-                <element signature="e#135#160#0" expanded="true" />
-                <marker date="1538766486993" expanded="true" signature="732:1627" ph="..." />
-                <marker date="1538766486993" expanded="true" signature="1687:6244" ph="..." />
-                <marker date="1538766486993" expanded="true" signature="6521:7493" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database_analysis/analysis_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-              <folding>
-                <element signature="e#12#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,6 +76,9 @@
       <find>frecuency</find>
       <find>types</find>
       <find>filling_ratio</find>
+      <find>database_analysis</find>
+      <find>analysis_utils</find>
+      <find>candidate_generation_window</find>
     </findStrings>
     <replaceStrings>
       <replace>frequency</replace>
@@ -103,9 +92,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/candidate_generation_pixel.py" />
-        <option value="$PROJECT_DIR$/traffic_sign_detection.py" />
         <option value="$PROJECT_DIR$/database_analysis/analysis_utils.py" />
         <option value="$PROJECT_DIR$/database_analysis/database_analysis_main.py" />
+        <option value="$PROJECT_DIR$/traffic_sign_detection.py" />
+        <option value="$PROJECT_DIR$/candidate_generation_window.py" />
       </list>
     </option>
   </component>
@@ -158,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.database_analysis_main">
+  <component name="RunManager" selected="Python.traffic_sign_detection">
     <configuration name="database_analysis_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Team_1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -207,8 +197,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.database_analysis_main" />
         <item itemvalue="Python.traffic_sign_detection" />
+        <item itemvalue="Python.database_analysis_main" />
       </list>
     </recent_temporary>
   </component>
@@ -269,17 +259,41 @@
           <line>54</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/traffic_sign_detection.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/candidate_generation_window.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="image_types" />
-        <watch expression="round(len(images_by_type[type]) * trainingElements)" language="Python" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>'{}/mask/mask.{}.png'.format(directory,base)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>fd</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>base</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>'{}/mask/mask.{}.png'.format(directory,name)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>round(len(images_by_type[type]) * trainingElements)</expression-string>
         <language-id>Python</language-id>
@@ -310,21 +324,6 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>thresholdA</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>database_info[&quot;type&quot;]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>database_info[&quot;Type&quot;]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
@@ -338,40 +337,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/candidate_generation_pixel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#42#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/traffic_sign_detection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="103" column="59" selection-start-line="103" selection-start-column="59" selection-end-line="103" selection-end-column="59" />
-          <folding>
-            <element signature="e#260#285#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../venv3/lib/python3.5/site-packages/PIL/ImageFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="239" selection-start-line="239" selection-end-line="239" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database_analysis/analysis_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#12#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -384,13 +353,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database_analysis/database_analysis_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="49" column="94" selection-start-line="49" selection-start-column="94" selection-end-line="49" selection-end-column="94" />
+        <state relative-caret-position="451">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
           <folding>
             <element signature="e#135#160#0" expanded="true" />
-            <marker date="1538766486993" expanded="true" signature="732:1627" ph="..." />
-            <marker date="1538766486993" expanded="true" signature="1687:6244" ph="..." />
-            <marker date="1538766486993" expanded="true" signature="6521:7493" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/candidate_generation_pixel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="91" column="22" lean-forward="true" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
+          <folding>
+            <element signature="e#42#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../venv3/lib/python3.5/site-packages/imageio/core/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="272" selection-start-line="272" selection-end-line="272" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/traffic_sign_detection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#260#285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database_analysis/analysis_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#12#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/candidate_generation_window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <element signature="e#42#91#0" expanded="true" />
           </folding>
         </state>
       </provider>

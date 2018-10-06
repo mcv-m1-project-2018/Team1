@@ -1,8 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import database_analysis.analysis_utils as imutil
+import cv2
 
 def candidate_generation_window_example1(im, pixel_candidates):
     window_candidates = [[17.0, 12.0, 49.0, 44.0], [60.0,90.0,100.0,130.0]]
+
+    lineThickness = 20
+    #cv2.rectangle(pixel_candidates, (500,500),(1000,1000), (255, 255, 255), lineThickness)
+
+
+    imutil.visualize_image(pixel_candidates)
 
     return window_candidates
  
@@ -33,10 +41,5 @@ def candidate_generation_window(im, pixel_candidates, method):
     window_candidates = switch_method(im, pixel_candidates, method)
 
     return window_candidates
-
-    
-if __name__ == '__main__':
-    window_candidates1 = candidate_generation_window(im, pixel_candidates, 'example1')
-    window_candidates2 = candidate_generation_window(im, pixel_candidates, 'example2')
 
     

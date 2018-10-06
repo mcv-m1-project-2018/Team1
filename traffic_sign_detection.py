@@ -46,7 +46,9 @@ def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
         print ('{}/{}'.format(directory,name))
 
         # Candidate Generation (pixel) ######################################
-        pixel_candidates = candidate_generation_pixel(im, pixel_method)
+        # pixel_candidates = candidate_generation_pixel(im, pixel_method)
+        #poner mascaras train mask cadas cual dentro del for
+        pixel_candidates = imageio.imread('{}/mask/mask.{}.png'.format(directory,base))
 
 
         fd = '{}/{}_{}'.format(output_dir, pixel_method, window_method)
@@ -54,7 +56,7 @@ def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
             os.makedirs(fd)
 
         out_mask_name = '{}/{}.png'.format(fd, base)
-        imageio.imwrite (out_mask_name, np.uint8(np.round(pixel_candidates)))
+        #imageio.imwrite (out_mask_name, np.uint8(np.round(pixel_candidates)))
 
 
         if window_method != 'None':
@@ -93,13 +95,12 @@ def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
                 
 if __name__ == '__main__':
     # read arguments
-    args = docopt(__doc__)
 
-    images_dir = args['<dirName>']          # Directory with input images and annotations
+    images_dir = '../train'    # Directory with input images and annotations
                                             # For instance, '../../DataSetDelivered/test'
-    output_dir = args['<outPath>']          # Directory where to store output masks, etc. For instance '~/m1-results/week1/test'
+    output_dir = '../train/masks'          # Directory where to store output masks, etc. For instance '~/m1-results/week1/test'
 
-    methodMask = args['<pixelMethod>']
+    methodMask = '<pixelMethod>'
 
     pixel_precision, pixel_accuracy, pixel_specificity, pixel_sensitivity, window_precision, window_accuracy = traffic_sign_detection(images_dir, output_dir, methodMask, 'example1');
 
