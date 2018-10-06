@@ -23,21 +23,15 @@ def candidate_generation_window_example1(im, pixel_candidates):
                 #prevent out of bounds
                 #finish of the shape
                 maxRange = 10
-                linesWithNoOnes = 0
+                linesWithOnes = 0
+                #search up and down, left and right
                 for ySearch in range(0, maxRange):
                     if len(pixel_candidates) > y + ySearch:
-                        if 1 not in pixel_candidates[y + ySearch][x-maxRange:x+maxRange]:
-                            linesWithNoOnes += 1
-                    else:
-                        linesWithNoOnes += 1
-                    if y - ySearch > 0:
-                        if 1 not in pixel_candidates[y - ySearch][x-maxRange:x+maxRange]:
-                            linesWithNoOnes += 1
-                    else:
-                        linesWithNoOnes += 1
+                        if 1 in pixel_candidates[y + ySearch][x-maxRange:x+maxRange]:
+                            linesWithOnes = 1
 
-                #not found
-                if linesWithNoOnes/2 == maxRange:
+                #not 1 found
+                if linesWithOnes == 0:
                     cv2.rectangle(im, (initialPointX, initialPointY), (x, y), (255, 255, 0), 2)
                     initialPointX = -1
                     initialPointY = -1
