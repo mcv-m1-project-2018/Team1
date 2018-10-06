@@ -13,14 +13,18 @@ def candidate_generation_window_example1(im, pixel_candidates):
 
     for pixels in pixel_candidates:
         for value in pixels:
-            if value == 1 and initialPoint == ():
-                initialPoint = (x, y)
+            if value == 1:
+                if initialPoint == ():
+                    initialPoint = (x, y)
+                #check the last one
+                if 1 not in pixel_candidates[y +1]:
+                    finalPoint = (x, y)
             x += 1
         x = 0
         y += 1
 
     lineThickness = 2
-    cv2.rectangle(im, initialPoint, (10000, 1000), (255, 255, 255), lineThickness)
+    cv2.rectangle(im, initialPoint, finalPoint, (255, 255, 255), lineThickness)
 
 
     imutil.visualize_image(im)
