@@ -30,16 +30,16 @@ def candidate_generation_window_example1(im, pixel_candidates):
             elif initialPointX != -1:
                 #prevent out of bounds
                 #finish of the shape
-                maxRange = 10
+                maxRange = 20
                 linesWithNoOnes = 0
                 for ySearch in range(0, maxRange):
                     if len(pixel_candidates) > y + ySearch:
-                        if 1 not in pixel_candidates[y + ySearch][x-10:x+10]:
+                        if 1 not in pixel_candidates[y + ySearch][x-maxRange:x+maxRange]:
                             linesWithNoOnes += 1
                     else:
                         linesWithNoOnes += 1
                     if y - ySearch > 0:
-                        if 1 not in pixel_candidates[y - ySearch][x-10:x+10]:
+                        if 1 not in pixel_candidates[y - ySearch][x-maxRange:x+maxRange]:
                             linesWithNoOnes += 1
                     else:
                         linesWithNoOnes += 1
