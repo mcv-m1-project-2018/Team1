@@ -10,37 +10,33 @@ def candidate_generation_window_example1(im, pixel_candidates):
     y = 0
     initialPointX = -1
     initialPointY = -1
-    finalPointX = 0
-    finalPointY = 0
+    finalPointX = -1
+    finalPointY = -1
 
-    for pixels in pixel_candidates: #It goes through the pixels to determine the starting point.
-        for value in pixels:
-            if value == 1 :
-                if initialPointY == -1 and initialPointX == -1:
+    for yAxis in pixel_candidates:  # It goes through the pixels to determine the starting point.
+        for pixel in yAxis:
+            if pixel == 1:
+                # first point and second init
+                if initialPointX == -1:
                     initialPointX = x
                     initialPointY = y
-                if y < finalPointY:
+                    finalPointX = x
+                    finalPointY = y
+                if y > finalPointY:
                     finalPointY = y
                 if x > finalPointX:
                     finalPointX = x
-            #if started a shape and we read a 0, check if the shape has finished on a specified margin
+            # second point (reverse axis for y)
             elif initialPointX != -1:
                 #prevent out of bounds
-                if len(pixels) >= finalPointX+10 and len(pixel_candidates) >= finalPointY + 2:
-                    #finish of the shape
-                    if 1 not in pixels[finalPointX:finalPointX+10] and pixel_candidates[finalPointY + 2][finalPointX] == 0:
+                #finish of the shape
+                for ySearch in range(0, 10):
+                    if 1 not in pixel_candidates[ySearch][x-10:x+10]:
                         cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
                         initialPointX = -1
                         initialPointY = -1
-                        finalPointX = 0
-                        finalPointY = 0
-                #finish of the image
-                else:
-                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
-                    initialPointX = -1
-                    initialPointY = -1
-                    finalPointX = 0
-                    finalPointY = 0
+                        finalPointX = -1
+                        finalPointY = -1
             x += 1
         #reset x every new line
         x = 0
