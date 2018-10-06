@@ -30,13 +30,27 @@ def candidate_generation_window_example1(im, pixel_candidates):
             elif initialPointX != -1:
                 #prevent out of bounds
                 #finish of the shape
-                for ySearch in range(0, 10):
-                    if 1 not in pixel_candidates[ySearch][x-10:x+10]:
-                        cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
-                        initialPointX = -1
-                        initialPointY = -1
-                        finalPointX = -1
-                        finalPointY = -1
+                maxRange = 10
+                linesWithNoOnes = 0
+                for ySearch in range(0, maxRange):
+                    if len(pixel_candidates) > y + ySearch:
+                        if 1 not in pixel_candidates[y + ySearch][x-10:x+10]:
+                            linesWithNoOnes += 1
+                    else:
+                        linesWithNoOnes += 1
+                    if y - ySearch > 0:
+                        if 1 not in pixel_candidates[y - ySearch][x-10:x+10]:
+                            linesWithNoOnes += 1
+                    else:
+                        linesWithNoOnes += 1
+
+                #not found
+                if linesWithNoOnes/2 == maxRange:
+                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
+                    initialPointX = -1
+                    initialPointY = -1
+                    finalPointX = -1
+                    finalPointY = -1
             x += 1
         #reset x every new line
         x = 0
