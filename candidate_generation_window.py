@@ -8,45 +8,37 @@ def candidate_generation_window_example1(im, pixel_candidates):
 
     x = 0
     y = 0
-    initialPointX = 0
-    initialPointY = 0
+    initialPointX = -1
+    initialPointY = -1
     finalPointX = 0
     finalPointY = 0
 
     for pixels in pixel_candidates: #It goes through the pixels to determine the starting point.
         for value in pixels:
             if value == 1 :
-                if initialPointY == 0 and initialPointX == 0 and finalPointY == 0 and finalPointX == 0:
+                if initialPointY == -1 and initialPointX == -1:
                     initialPointX = x
                     initialPointY = y
-                    finalPointX = x
+                if y < finalPointY:
                     finalPointY = y
-                if y < initialPointY:
-                    finalPointY = y
-                if y > initialPointY:
-                    initialPointY = y
                 if x > finalPointX:
                     finalPointX = x
-                if x < initialPointX:
-                    initialPointX = x
-            #if started a shape, check if the shape has finished on a specified margin
-            elif initialPointX != 0:
-                shapePixels =  []
-
-                if len(pixels) >= x+100:
-                    #sub list where the shape is
-                    shapePixels = pixels[x:x+100]
+            #if started a shape and we read a 0, check if the shape has finished on a specified margin
+            elif initialPointX != -1:
+                #prevent out of bounds
+                if len(pixels) >= finalPointX+10 and len(pixel_candidates) >= finalPointY + 2:
+                    #finish of the shape
+                    if 1 not in pixels[finalPointX:finalPointX+10] and pixel_candidates[finalPointY + 2][finalPointX] == 0:
+                        cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
+                        initialPointX = -1
+                        initialPointY = -1
+                        finalPointX = 0
+                        finalPointY = 0
+                #finish of the image
                 else:
                     cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
-                    initialPointX = 0
-                    initialPointY = 0
-                    finalPointX = 0
-                    finalPointY = 0
-
-                if not 1 in shapePixels:
-                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
-                    initialPointX = 0
-                    initialPointY = 0
+                    initialPointX = -1
+                    initialPointY = -1
                     finalPointX = 0
                     finalPointY = 0
             x += 1
