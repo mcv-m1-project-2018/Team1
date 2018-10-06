@@ -96,9 +96,9 @@ def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
 if __name__ == '__main__':
     # read arguments
 
-    images_dir = '../train'    # Directory with input images and annotations
+    images_dir = 'train'    # Directory with input images and annotations
                                             # For instance, '../../DataSetDelivered/test'
-    output_dir = '../train/masks'          # Directory where to store output masks, etc. For instance '~/m1-results/week1/test'
+    output_dir = 'train/masks'          # Directory where to store output masks, etc. For instance '~/m1-results/week1/test'
 
     methodMask = '<pixelMethod>'
 

@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68e9db5b-f036-48cd-bd12-74969fb45361" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/candidate_generation_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/candidate_generation_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/00.001767.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/traffic_sign_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/traffic_sign_detection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/00.000948.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/train/00.000948.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mask/mask.00.000948.png" beforeDir="false" afterPath="$PROJECT_DIR$/train/mask/mask.00.000948.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,22 +25,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="19" />
+          <entry key="py" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="19" />
+          <entry key="Python" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3603" />
+          <entry key="py" value="4501" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3603" />
+          <entry key="Python" value="4501" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -46,10 +51,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/candidate_generation_window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+            <state relative-caret-position="406">
+              <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
               <folding>
                 <element signature="e#42#91#0" expanded="true" />
+                <marker date="1538825948629" expanded="true" signature="2132:2135" ph="..." />
               </folding>
             </state>
           </provider>
@@ -58,20 +64,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/traffic_sign_detection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="735">
+              <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding>
                 <element signature="e#260#285#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../venv3/lib/python3.5/site-packages/imageio/core/request.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="272" selection-start-line="272" selection-end-line="272" />
             </state>
           </provider>
         </entry>
@@ -122,16 +119,6 @@
             <path>
               <item name="Team_1" type="b2602c69:ProjectViewProjectNode" />
               <item name="Team_1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Team_1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Team_1" type="462c0819:PsiDirectoryNode" />
-              <item name="database_analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Team_1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Team_1" type="462c0819:PsiDirectoryNode" />
-              <item name="evaluation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -269,7 +256,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/candidate_generation_window.py</url>
-          <line>42</line>
+          <line>59</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
@@ -393,8 +380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/traffic_sign_detection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="735">
+          <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
           <folding>
             <element signature="e#260#285#0" expanded="true" />
           </folding>
@@ -403,10 +390,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/candidate_generation_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+        <state relative-caret-position="406">
+          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
           <folding>
             <element signature="e#42#91#0" expanded="true" />
+            <marker date="1538825948629" expanded="true" signature="2132:2135" ph="..." />
           </folding>
         </state>
       </provider>

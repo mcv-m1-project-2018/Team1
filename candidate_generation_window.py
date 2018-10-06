@@ -29,15 +29,32 @@ def candidate_generation_window_example1(im, pixel_candidates):
                     finalPointX = x
                 if x < initialPointX:
                     initialPointX = x
+            #if started a shape, check if the shape has finished on a specified margin
+            elif initialPointX != 0:
+                shapePixels =  []
+
+                if len(pixels) >= x+100:
+                    #sub list where the shape is
+                    shapePixels = pixels[x:x+100]
+                else:
+                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
+                    initialPointX = 0
+                    initialPointY = 0
+                    finalPointX = 0
+                    finalPointY = 0
+
+                if not 1 in shapePixels:
+                    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 0), 2)
+                    initialPointX = 0
+                    initialPointY = 0
+                    finalPointX = 0
+                    finalPointY = 0
             x += 1
         #reset x every new line
         x = 0
         y += 1
 
-    lineThickness = 2
-    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 255), lineThickness)
-
-
+    #imutil.visualize_image(pixel_candidates)
     imutil.visualize_image(im)
 
     return window_candidates
