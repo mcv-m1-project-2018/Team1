@@ -8,23 +8,34 @@ def candidate_generation_window_example1(im, pixel_candidates):
 
     x = 0
     y = 0
-    initialPoint = ()
-    finalPoint = ()
+    initialPointX = 0
+    initialPointY = 0
+    finalPointX = 0
+    finalPointY = 0
 
     for pixels in pixel_candidates: #It goes through the pixels to determine the starting point.
         for value in pixels:
-            if value == 1:
-                if initialPoint == ():
-                    initialPoint = (x, y)
-                #check the last one
-                if 1 not in pixel_candidates[y +1]:
-                    finalPoint = (x, y)
+            if value == 1 :
+                if initialPointY == 0 and initialPointX == 0 and finalPointY == 0 and finalPointX == 0:
+                    initialPointX = x
+                    initialPointY = y
+                    finalPointX = x
+                    finalPointY = y
+                if y < initialPointY:
+                    finalPointY = y
+                if y > initialPointY:
+                    initialPointY = y
+                if x > finalPointX:
+                    finalPointX = x
+                if x < initialPointX:
+                    initialPointX = x
             x += 1
+        #reset x every new line
         x = 0
         y += 1
 
     lineThickness = 2
-    cv2.rectangle(im, initialPoint, finalPoint, (255, 255, 255), lineThickness)
+    cv2.rectangle(im, (initialPointX, initialPointY), (finalPointX, finalPointY), (255, 255, 255), lineThickness)
 
 
     imutil.visualize_image(im)
