@@ -14,8 +14,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 PREREQUISITES
 
-*Paquetes q hay q instalar
+The following packages must be installed to work:
 
+- pyramid
+- numpy
+- imageio
+- cv2
+- random
+- matplotlib
+- skimage
+- docopt
+- sklearn
+- plotly
+- fnmatch
 
 INSTALLING
 
