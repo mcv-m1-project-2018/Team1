@@ -20,6 +20,10 @@ from candidate_generation_window import candidate_generation_window
 from evaluation.load_annotations import load_annotations
 import evaluation.evaluation_funcs as evalf
 
+'''
+Main method from where the sig detection will be executed.
+'''
+
 def traffic_sign_detection(directory, output_dir, pixel_method, window_method):
 
     pixelTP  = 0

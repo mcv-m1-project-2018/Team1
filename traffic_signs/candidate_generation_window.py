@@ -5,6 +5,13 @@ import time
 import cv2
 import database_analysis.analysis_utils as imutil
 
+'''
+Tools for detecting signals using a mask. A square 
+will be drawn at every detected signal. The threshold 
+of each signal class and each filling ratio are used 
+to determine if we detect a signal on the image.  
+'''
+
 def candidate_generation_window_example1(im, pixel_candidates,thresholds):
     window_candidates = []
 

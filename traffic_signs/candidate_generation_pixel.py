@@ -12,7 +12,12 @@ import pyramid
 import argparse
 import time
 
- 
+'''
+Tools for generate a mask using the specified method YCbCr, hsv,
+lab. Depending on the method selected, the mask will be on different
+color spaces.
+'''
+
 def candidate_generation_pixel_hsv(im):
 
     hsv_im = color.rgb2hsv(im)

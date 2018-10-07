@@ -19,6 +19,8 @@ import sys
 import math
 
 
+
+
 def main(directory):
     evaluate_elements = ['gt', 'mask']
     dirname = '{}/..{}'.format(os.path.dirname(__file__), directory)
