@@ -33,7 +33,7 @@ and test folder for the test images).
 
 RUNNING THE TESTS
 
-Execute traffic_sign_model.py file. Arguments:
+Execute traffic_sign_detection.py file. Arguments:
 
 - images_dir: Directory with sample images and annotations.
 
