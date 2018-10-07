@@ -1,4 +1,3 @@
-import cv2
 import matplotlib.pyplot as plt
 import plotly
 import plotly.plotly as py
@@ -161,19 +160,21 @@ def divide_by_type(dic_images,type):
 def acumulate_hist(im, space,channel):
     init_his = 0
     final_hist = 255
-
+    im_aux = im
     if space == 'HSV':
-        im = color.rgb2hsv(im)
+        im_aux = color.rgb2hsv(im)
         final_hist = 1
     elif space == 'YCBCR':
-        im = color.rgb2ycbcr(im)
+        im_aux = color.rgb2ycbcr(im)
+
+
     if channel == 'ch1':
-        his = np.histogram(im[:, :, 0], bins=255, range=(init_his, final_hist))[0]
+        his = np.histogram(im_aux[:, :, 0], bins=255, range=(init_his, final_hist))[0]
     elif channel == 'ch2':
-        his = np.histogram(im[:, :, 1], bins=255, range=(init_his, final_hist))[0]
+        his = np.histogram(im_aux[:, :, 1], bins=255, range=(init_his, final_hist))[0]
     elif channel == 'ch3':
-        his = np.histogram(im[:, :, 2], bins=255, range=(init_his, final_hist))[0]
-    bins = np.histogram(im[:, :, 0], bins=255, range=(init_his, final_hist))[1]
+        his = np.histogram(im_aux[:, :, 2], bins=255, range=(init_his, final_hist))[0]
+    bins = np.histogram(im_aux[:, :, 0], bins=255, range=(init_his, final_hist))[1]
 
     return bins, his, init_his, final_hist
 
@@ -197,7 +198,7 @@ def visualize_histogram(tittle,his1, his2, his3, initial, final,crop_img_signal)
     # Evaluate GMM
     gmm_x = np.linspace(0, 253, 256)
     gmm_y = np.exp(gmm.score_samples(gmm_x.reshape(-1, 1)))
-    max_value = gmm_x[gmm_y.argmax()]
+
     # Plot histograms and gaussian curves
     channel[0].plot(gmm_x, gmm_y, color="crimson", lw=4, label="GMM")
 

@@ -11,18 +11,10 @@ import fnmatch
 import imageio
 import os
 import database_analysis.analysis_utils as imutil
-import matplotlib.pyplot as plt
-import cv2
-from sklearn.mixture import GaussianMixture
-
-import sys
-import math
-
-
-
 
 def main(directory):
     evaluate_elements = ['gt', 'mask']
+    print('{}/..{}'.format(os.path.dirname(__file__), directory))
     dirname = '{}/..{}'.format(os.path.dirname(__file__), directory)
     file_names = sorted(fnmatch.filter(os.listdir(dirname), '*.jpg'))
     database_info = dict()
@@ -43,6 +35,8 @@ def main(directory):
     database_info["r_channel_hist"] = list()
     database_info["g_channel_hist"] = list()
     database_info["b_channel_hist"] = list()
+    database_info["max_min_size"] = list()
+
 
     count_frecunacy_typeA = 0
     count_frecunacy_typeB = 0
@@ -67,7 +61,6 @@ def main(directory):
         im_current = imageio.imread(path_image)
         im_current_mask = imageio.imread(path_image_mask)
 
-        # imutil.visualize_image(im_current)
         database_info["image"].append(name)
 
         # Read .txt info
@@ -105,8 +98,6 @@ def main(directory):
             downx_trunc = downx[:downx.index('.')]
             crop_img = im_current_mask[int(topy_trunc):int(downy_trunc), int(topx_trunc):int(downx_trunc)]
 
-            # imutil.visualize_image(crop_img)
-
             count_background = 0
             count_sig = 0
             for line in crop_img:
@@ -131,11 +122,18 @@ def main(directory):
     database_info["frecuency_typeE"] = count_frecunacy_typeE / count_img
     database_info["frecuency_typeF"] = count_frecunacy_typeF / count_img
 
-    #imutil.create_table(
-    #    ['image', 'Type', 'height_box', 'width_box', 'form_factor', 'filling_ratio', 'mask_area', 'background_area'],
-    #    [database_info["image"], database_info["type"], database_info["height_box"], database_info["width_box"],
-    #     database_info["form_factor"], database_info["filling_ratio"], database_info["mask_area"],
-    #     database_info["background_area"]])
+    minsAreas = []
+    for i in database_info["mask_area"]:
+        if i != 0:
+            minsAreas.append(i)
+
+    database_info["max_min_size"] = [max(database_info["mask_area"]),min(minsAreas)]
+
+    imutil.create_table(
+        ['image', 'Type', 'height_box', 'width_box', 'form_factor', 'filling_ratio', 'mask_area', 'background_area','min area','max area'],
+        [database_info["image"], database_info["type"], database_info["height_box"], database_info["width_box"],
+         database_info["form_factor"], database_info["filling_ratio"], database_info["mask_area"],
+         database_info["background_area"],database_info["max_min_size"][0],database_info["max_min_size"][1] ])
 
     images_by_type = dict()
 
@@ -154,21 +152,15 @@ def main(directory):
 
         final_his_f = 0
         initial_his_f = 0
-        initial_his_f_hsv = 0
-        final_his_f_hsv = 0
-
-        bins_f = 0
-        bins_f_hsv = 0
 
         for j in images_by_type[i]:
             im_current = imageio.imread('{}/{}'.format(dirname,j))
             path_image_gt = '{}/{}/{}'.format(dirname, evaluate_elements[0], 'gt.{}'.format(j.replace('.jpg', '.txt')))
+
             acumulate_hist_ch1 = np.zeros(255)
             acumulate_hist_ch2 = np.zeros(255)
             acumulate_hist_ch3 = np.zeros(255)
-            acumulate_hist_ch1_hsv = np.zeros(255)
-            acumulate_hist_ch2_hsv = np.zeros(255)
-            acumulate_hist_ch3_hsv = np.zeros(255)
+
 
             acumulate_im = np.array([])
 
@@ -186,32 +178,112 @@ def main(directory):
                     acumulate_im = crop_img_signal
                 acumulate_im += crop_img_signal
 
-                bins, his_ch1, init_his, final_his = imutil.acumulate_hist(crop_img_signal,'RGB','ch1')
-                bins, his_ch2, init_his, final_his = imutil.acumulate_hist(crop_img_signal, 'RGB', 'ch2')
-                bins, his_ch3, init_his, final_his = imutil.acumulate_hist(crop_img_signal, 'RGB', 'ch3')
+                bins, his_ch1, init_his, final_his = imutil.acumulate_hist(crop_img_signal,'YCBCR','ch1')
+                bins, his_ch2, init_his, final_his = imutil.acumulate_hist(crop_img_signal, 'YCBCR', 'ch2')
+                bins, his_ch3, init_his, final_his = imutil.acumulate_hist(crop_img_signal, 'YCBCR', 'ch3')
                 acumulate_hist_ch1 += his_ch1
                 acumulate_hist_ch2 += his_ch2
                 acumulate_hist_ch3 += his_ch3
 
-                bins_hsv, his_ch1_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV', 'ch1')
-                bins_hsv, his_ch2_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV', 'ch2')
-                bins_hsv, his_ch3_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV', 'ch3')
+                initial_his_f = init_his
+                final_his_f = final_his
+
+
+        gmm = acumulate_im.ravel() / np.size(images_by_type[i])
+        imutil.visualize_histogram('histogram signal type {}YCBCR'.format(i),acumulate_hist_ch1, acumulate_hist_ch2, acumulate_hist_ch3,initial_his_f, final_his_f, gmm)
+
+    for i in images_by_type:
+
+        initial_his_f_hsv = 0
+        final_his_f_hsv = 0
+
+        for j in images_by_type[i]:
+            im_current = imageio.imread('{}/{}'.format(dirname, j))
+            path_image_gt = '{}/{}/{}'.format(dirname, evaluate_elements[0], 'gt.{}'.format(j.replace('.jpg', '.txt')))
+
+            acumulate_hist_ch1_hsv = np.zeros(255)
+            acumulate_hist_ch2_hsv = np.zeros(255)
+            acumulate_hist_ch3_hsv = np.zeros(255)
+
+
+            acumulate_im = np.array([])
+
+            with open(path_image_gt) as f:
+                lines = f.readlines()
+
+                topy, topx, downy, downx, types = lines[0].split(' ')
+
+                topy_trunc = topy[:topy.index('.')]
+                topx_trunc = topx[:topx.index('.')]
+                downy_trunc = downy[:downy.index('.')]
+                downx_trunc = downx[:downx.index('.')]
+                crop_img_signal = im_current[int(topy_trunc):int(downy_trunc), int(topx_trunc):int(downx_trunc)]
+                if (acumulate_im.size == 0):
+                    acumulate_im = crop_img_signal
+                acumulate_im += crop_img_signal
+
+                bins_hsv, his_ch1_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV',
+                                                                                           'ch1')
+                bins_hsv, his_ch2_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV',
+                                                                                           'ch2')
+                bins_hsv, his_ch3_hsv, init_his_hsv, final_his_hsv = imutil.acumulate_hist(crop_img_signal, 'HSV',
+                                                                                           'ch3')
                 acumulate_hist_ch1_hsv += his_ch1_hsv
                 acumulate_hist_ch2_hsv += his_ch2_hsv
                 acumulate_hist_ch3_hsv += his_ch3_hsv
 
-                initial_his_f = init_his
-                final_his_f = final_his
 
-                initial_his_f_hsv= init_his_hsv
+                initial_his_f_hsv = init_his_hsv
                 final_his_f_hsv = final_his_hsv
 
+        imutil.visualize_histogram('histogram signal type {}HSV'.format(i),acumulate_hist_ch1_hsv, acumulate_hist_ch2_hsv, acumulate_hist_ch3_hsv,initial_his_f_hsv, final_his_f_hsv, gmm)
 
-        gmm = acumulate_im.ravel() / np.size(images_by_type[i])
-        imutil.visualize_histogram('histogram signal type {}'.format(i),acumulate_hist_ch1, acumulate_hist_ch2, acumulate_hist_ch3,initial_his_f, final_his_f, gmm)
+    for i in images_by_type:
 
-        imutil.visualize_histogram('histogram signal type {}'.format(i),acumulate_hist_ch1_hsv, acumulate_hist_ch2_hsv, acumulate_hist_ch3_hsv,initial_his_f_hsv, final_his_f_hsv, gmm)
+        initial_his_f_rgb = 0
+        final_his_f_rgb = 0
 
+        for j in images_by_type[i]:
+            im_current = imageio.imread('{}/{}'.format(dirname, j))
+            path_image_gt = '{}/{}/{}'.format(dirname, evaluate_elements[0], 'gt.{}'.format(j.replace('.jpg', '.txt')))
+
+
+            acumulate_hist_ch1_rgb = np.zeros(255)
+            acumulate_hist_ch2_rgb = np.zeros(255)
+            acumulate_hist_ch3_rgb = np.zeros(255)
+
+            acumulate_im = np.array([])
+
+            with open(path_image_gt) as f:
+                lines = f.readlines()
+
+                topy, topx, downy, downx, types = lines[0].split(' ')
+
+                topy_trunc = topy[:topy.index('.')]
+                topx_trunc = topx[:topx.index('.')]
+                downy_trunc = downy[:downy.index('.')]
+                downx_trunc = downx[:downx.index('.')]
+                crop_img_signal = im_current[int(topy_trunc):int(downy_trunc), int(topx_trunc):int(downx_trunc)]
+                if (acumulate_im.size == 0):
+                    acumulate_im = crop_img_signal
+                acumulate_im += crop_img_signal
+
+
+
+                bins_rgb, his_ch1_rgb, init_his_rgb, final_his_rgb = imutil.acumulate_hist(crop_img_signal, 'RGB',
+                                                                                           'ch1')
+                bins_rgb, his_ch2_rgb, init_his_rgb, final_his_rgb = imutil.acumulate_hist(crop_img_signal, 'RGB',
+                                                                                           'ch2')
+                bins_rgb, his_ch3_rgb, init_his_rgb, final_his_rgb = imutil.acumulate_hist(crop_img_signal, 'RGB',
+                                                                                           'ch3')
+                acumulate_hist_ch1_rgb += his_ch1_rgb
+                acumulate_hist_ch2_rgb += his_ch2_rgb
+                acumulate_hist_ch3_rgb += his_ch3_rgb
+
+                initial_his_f_rgb = init_his_rgb
+                final_his_f_rgb = final_his_rgb
+
+        imutil.visualize_histogram('histogram signal type {}RGB'.format(i),acumulate_hist_ch1_rgb, acumulate_hist_ch2_rgb, acumulate_hist_ch3_rgb,initial_his_f_rgb, final_his_f_rgb, gmm)
 
 
 if __name__ == "__main__":

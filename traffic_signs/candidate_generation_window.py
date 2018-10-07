@@ -1,16 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import argparse
-import time
-import cv2
-import database_analysis.analysis_utils as imutil
 
-'''
-Tools for detecting signals using a mask. A square 
-will be drawn at every detected signal. The threshold 
-of each signal class and each filling ratio are used 
-to determine if we detect a signal on the image.  
-'''
+import cv2
 
 def candidate_generation_window_example1(im, pixel_candidates,thresholds):
     window_candidates = []
@@ -31,27 +22,21 @@ def candidate_generation_window_example1(im, pixel_candidates,thresholds):
                 filling_ratio = 1
             else:
                 filling_ratio = area_signal / area_background
-            is_signal, type_signal=is_windows_signal(filling_ratio,thresholds)
+            is_signal, type_signal = is_windows_signal(filling_ratio,thresholds)
             #imutil.visualize_image(crop_img)
             if is_signal:
                 window_candidates.append([y,y + winH, x,x + winW])
-                #imutil.visualize_image(crop_img)
-
-            # THIS IS WHERE YOU WOULD PROCESS YOUR WINDOW, SUCH AS APPLYING A
-            # MACHINE LEARNING CLASSIFIER TO CLASSIFY THE CONTENTS OF THE
-            # WINDOW
 
             # since we do not have a classifier, we'll just draw the window
             clone = resized.copy()
-            #cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
-            #cv2.imshow("Window", clone)
-            #cv2.waitKey(1)
+            cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
+            cv2.imshow("Window", clone)
+            cv2.waitKey(1)
+
     return window_candidates
  
 def candidate_generation_window_example2(im, pixel_candidates,thresholds):
     window_candidates = [[21.0, 14.0, 54.0, 47.0], [63.0,92.0,103.0,132.0],[200.0,200.0,250.0,250.0]]
-    # sfdfwer
-
     return window_candidates
 
 def info_image_segment(im):
@@ -124,6 +109,7 @@ def pyramid(image, scale=1.5, minSize=(30, 30)):
 
         # yield the next image in the pyramid
         yield image
+
 def is_windows_signal(current_ratio,ratios):
 
     id_signal = False

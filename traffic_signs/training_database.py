@@ -2,12 +2,6 @@ import database_analysis.analysis_utils as imutil
 import random
 import numpy as np
 
-'''
-Spliting the training data in two parts 70%/30%.
-The first part is for training and the second for 
-validation.
-'''
-
 def splitData(traningInfo):
     image_types = ['A', 'B', 'C', 'D', 'E', 'F']
     images_by_type = dict()

@@ -118,8 +118,10 @@ def performance_evaluation_window(TP, FN, FP):
     
     The function returns the precision, accuracy and sensitivity
     """
-    
-    precision   = float(TP) / float(TP+FP); # Q: What if i do not have TN?
+    TN = float(TP+FP)
+    if float(TP+FP) ==0:
+        TN=float(TP)
+    precision   = float(TP) / TN; # Q: What if i do not have TN?
     sensitivity = float(TP) / float(TP+FN)
     accuracy    = float(TP) / float(TP+FN+FP);
 
