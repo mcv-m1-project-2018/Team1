@@ -2,7 +2,11 @@
 TRAFFIC SIGN DETECTION
 
 *Project description
+This project has the goal of applying segmentation to diferent sample images.
+It determines the position of traffic signals at each image, generating first a
+mask from where the information is extracted to detect the signals.
 
+Different color spaces for mask generation has been used, including YCbCr, hsv and lab.
 
 GETTING STARTED
 
