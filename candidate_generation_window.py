@@ -8,33 +8,12 @@ def candidate_generation_window_example1(im, pixel_candidates):
 
     x = 0
     y = 0
-    initialPointX = -1
-    initialPointY = -1
 
-    for yAxis in pixel_candidates:  # It goes through the pixels to determine the starting point.
-        for pixel in yAxis:
+    for line in pixel_candidates:  # It goes through the pixels to determine the starting point.
+        for pixel in line:
             if pixel == 1:
-                # first point and second init
-                if initialPointX == -1:
-                    initialPointX = x
-                    initialPointY = y
-            # second point (reverse axis for y)
-            elif initialPointX != -1:
-                #prevent out of bounds
-                #finish of the shape
-                maxRange = 10
-                linesWithOnes = 0
-                #search up and down, left and right
-                for ySearch in range(0, maxRange):
-                    if len(pixel_candidates) > y + ySearch:
-                        if 1 in pixel_candidates[y + ySearch][x-maxRange:x+maxRange]:
-                            linesWithOnes = 1
-
-                #not 1 found
-                if linesWithOnes == 0:
-                    cv2.rectangle(im, (initialPointX, initialPointY), (x, y), (255, 255, 0), 2)
-                    initialPointX = -1
-                    initialPointY = -1
+                (finalX, finalY) = searchForShape(pixel_candidates[y:len(pixel_candidates)], x) #no more white pixels above
+                cv2.rectangle(im, (x, y), (finalX, finalY), (255, 255, 0), 2)
             x += 1
         #reset x every new line
         x = 0
@@ -44,6 +23,28 @@ def candidate_generation_window_example1(im, pixel_candidates):
     imutil.visualize_image(im)
 
     return window_candidates
+
+def searchForShape(subMatrix, startingPoint):
+    x = startingPoint
+    y = 0
+    maxX = 0
+    for line in subMatrix:
+        for pixel in line:
+            if pixel == 1:
+                x += 1
+                #save the maximum X
+                if x > maxX:
+                    maxX = x
+            else:
+                break
+        if y < 100:
+            y += 1
+            x = startingPoint
+        else:
+            break
+
+    return (x, y)
+
  
 def candidate_generation_window_example2(im, pixel_candidates):
     window_candidates = [[21.0, 14.0, 54.0, 47.0], [63.0,92.0,103.0,132.0],[200.0,200.0,250.0,250.0]]
