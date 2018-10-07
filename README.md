@@ -35,15 +35,15 @@ RUNNING THE TESTS
 
 Execute traffic_sign_model.py file. Arguments:
 
--images_dir Directory with sample images and annotations. 
+- images_dir: Directory with sample images and annotations.
 
--output_dir Directory where to store output masks, etc. 
+- output_dir: Directory where to store output masks, etc. 
 
--test_dir Directory with the test split images.
+- test_dir: Directory with the test split images.
 
--pixelMethod Colour space used for creating the masks (YCbCr, hsv or lab). 
+- pixelMethod: Colour space used for creating the masks (YCbCr, hsv or lab). 
 
--windowMethod Window method used for detecting signals.
+- windowMethod: Window method used for detecting signals.
 
 AUTHORS
 Cara Roca, David
